@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+    <h1>Sign Up</h1>
+
+    <form method="POST" action="{{ url_for('auth.signup') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input 
+                type="password" 
+                class="form-control" 
+                id="password" 
+                name="password" 
+                required
+                minlength="8"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                title="Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character."
+            >
+            <small class="text-muted">
+                Must be at least 8 characters long and include uppercase, lowercase, a number, and a special character.
+            </small>
+        </div>
+
+        <button type="submit" class="btn btn-success">Sign Up</button>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Already have an account</a>
+    </form>
+</body>
+</html>
